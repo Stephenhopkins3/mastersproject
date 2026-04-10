@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Research | The Masters Project</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --purple:       #4A2080;
+    --purple-mid:   #6B3FA0;
+    --purple-wash:  #F3EFFE;
+    --purple-deep:  #2D1050;
+    --gold:         #C9A84C;
+    --gold-light:   #FFF8E7;
+    --gold-mid:     #E8D5A3;
+    --white:        #FFFFFF;
+    --off-white:    #FAFAFA;
+    --text:         #1A1A2E;
+    --text-muted:   #5A5A7A;
+    --border:       #E8E0F5;
+    --max:          1100px;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'DM Sans',sans-serif;color:var(--text);background:var(--white);line-height:1.7;font-size:16px;}
+  h1,h2,h3,h4{font-family:'Playfair Display',serif;line-height:1.25;}
+  a{color:inherit;}
+
+  /* NAV */
+  nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.97);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);padding:0 2rem;}
+  .nav-inner{max-width:var(--max);margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:68px;}
+  .nav-logo{text-decoration:none;display:flex;align-items:center;gap:10px;}
+  .nav-logo-mark{width:32px;height:32px;background:var(--purple);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .nav-logo-mark svg{width:20px;height:20px;}
+  .nav-logo-text{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:var(--purple);line-height:1.1;}
+  .nav-logo-text span{color:var(--gold);}
+  .nav-links{display:flex;align-items:center;gap:2rem;list-style:none;}
+  .nav-links a{font-size:0.88rem;font-weight:500;color:var(--text-muted);text-decoration:none;transition:color 0.2s;}
+  .nav-links a:hover,.nav-links a.active{color:var(--purple);}
+  .nav-cta{background:var(--purple);color:var(--white)!important;padding:9px 20px;border-radius:6px;font-weight:600!important;transition:background 0.2s!important;}
+  .nav-cta:hover{background:var(--purple-mid)!important;color:var(--white)!important;}
+
+  /* PAGE HERO */
+  .page-hero{background:var(--purple-deep);padding:80px 2rem 72px;}
+  .page-hero-inner{max-width:var(--max);margin:0 auto;}
+  .page-hero-eyebrow{font-size:0.78rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin-bottom:18px;}
+  .page-hero h1{font-size:clamp(2.2rem,5vw,3.4rem);color:var(--white);margin-bottom:20px;max-width:720px;}
+  .page-hero p{font-size:1.1rem;color:rgba(255,255,255,0.72);max-width:640px;line-height:1.75;}
+
+  /* TOC */
+  .toc-band{background:var(--purple-wash);border-bottom:1px solid var(--border);padding:28px 2rem;}
+  .toc-inner{max-width:var(--max);margin:0 auto;}
+  .toc-label{font-size:0.75rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--purple);margin-bottom:14px;}
+  .toc-list{display:flex;flex-wrap:wrap;gap:10px;list-style:none;}
+  .toc-list a{font-size:0.83rem;font-weight:500;color:var(--purple);text-decoration:none;background:var(--white);border:1px solid var(--border);border-radius:20px;padding:5px 14px;transition:all 0.2s;}
+  .toc-list a:hover{background:var(--purple);color:var(--white);border-color:var(--purple);}
+
+  /* SECTIONS */
+  .research-section{padding:72px 2rem;border-bottom:1px solid var(--border);}
+  .research-section:last-of-type{border-bottom:none;}
+  .research-section:nth-child(even){background:var(--off-white);}
+  .section-inner{max-width:var(--max);margin:0 auto;}
+  .section-number{font-size:0.72rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;}
+  .section-inner h2{font-size:clamp(1.6rem,3vw,2.2rem);color:var(--purple-deep);margin-bottom:16px;}
+  .section-inner .lead{font-size:1.08rem;color:var(--text-muted);margin-bottom:32px;max-width:680px;line-height:1.8;}
+  .section-body{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;}
+  .section-body.full{grid-template-columns:1fr;}
+  .section-text p{margin-bottom:16px;line-height:1.8;}
+  .section-text p:last-child{margin-bottom:0;}
+
+  /* STAT CALLOUT */
+  .stat-callout{background:var(--purple);border-radius:12px;padding:32px;color:var(--white);display:flex;flex-direction:column;gap:8px;}
+  .stat-callout .stat-num{font-family:'Playfair Display',serif;font-size:3rem;font-weight:700;color:var(--gold);line-height:1;}
+  .stat-callout .stat-label{font-size:0.9rem;color:rgba(255,255,255,0.8);line-height:1.5;}
+  .stat-callout .stat-source{font-size:0.72rem;color:rgba(255,255,255,0.45);margin-top:8px;font-style:italic;}
+
+  /* CITATION CARD */
+  .citation-card{background:var(--white);border:1px solid var(--border);border-left:4px solid var(--gold);border-radius:8px;padding:20px 24px;margin-top:24px;}
+  .citation-card p{font-size:0.85rem;color:var(--text-muted);line-height:1.65;margin:0;}
+  .citation-card strong{color:var(--text);font-weight:600;}
+
+  /* MULTI STAT ROW */
+  .stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:32px;}
+  .stat-mini{background:var(--purple-wash);border-radius:10px;padding:24px 20px;text-align:center;}
+  .stat-mini .num{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:700;color:var(--purple);line-height:1;}
+  .stat-mini .lbl{font-size:0.8rem;color:var(--text-muted);margin-top:6px;line-height:1.4;}
+
+  /* MEASUREMENT TABLE */
+  .measure-table{width:100%;border-collapse:collapse;margin-top:24px;}
+  .measure-table th{background:var(--purple);color:var(--white);font-size:0.8rem;font-weight:600;text-align:left;padding:12px 16px;letter-spacing:0.04em;}
+  .measure-table td{padding:12px 16px;font-size:0.88rem;border-bottom:1px solid var(--border);vertical-align:top;}
+  .measure-table tr:last-child td{border-bottom:none;}
+  .measure-table tr:nth-child(even) td{background:var(--off-white);}
+  .badge{display:inline-block;font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:20px;background:var(--purple-wash);color:var(--purple);}
+
+  /* FOOTER */
+  footer{background:var(--purple-deep);padding:48px 2rem;}
+  .footer-inner{max-width:var(--max);margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;}
+  .footer-brand .footer-name{font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--white);font-weight:700;}
+  .footer-brand .footer-name span{color:var(--gold);}
+  .footer-brand p{font-size:0.78rem;color:rgba(255,255,255,0.4);margin-top:4px;font-style:italic;}
+  .footer-links{display:flex;gap:20px;list-style:none;flex-wrap:wrap;}
+  .footer-links a{font-size:0.82rem;color:rgba(255,255,255,0.55);text-decoration:none;transition:color 0.2s;}
+  .footer-links a:hover{color:var(--gold);}
+  .footer-copy{font-size:0.75rem;color:rgba(255,255,255,0.3);}
+
+  @media(max-width:768px){
+    .section-body{grid-template-columns:1fr;}
+    .stat-row{grid-template-columns:1fr 1fr;}
+    .nav-links{display:none;}
+  }
+  @media(max-width:480px){
+    .stat-row{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-mark">
+        <img src="data:image/png;base64,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" alt="Chess knight logo" style="width:28px;height:28px;display:block;"></div>
+      <div class="nav-logo-text">MASTERS <span>PROJECT</span></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html#program">Program</a></li>
+      <li><a href="research.html" class="active">Research</a></li>
+      <li><a href="the_team.html">Team</a></li>
+      <li><a href="index.html#contact" class="nav-cta">Get Involved</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <div class="page-hero-eyebrow">Evidence Base</div>
+    <h1>The Research Behind Every Decision</h1>
+    <p>The Masters Project is built on peer-reviewed research and field-tested practice. Every element of our model — from the grade we target to the number of sessions per week — is grounded in evidence about what actually moves the needle for students.</p>
+  </div>
+</section>
+
+<!-- TABLE OF CONTENTS -->
+<div class="toc-band">
+  <div class="toc-inner">
+    <div class="toc-label">Jump to Section</div>
+    <ul class="toc-list">
+      <li><a href="#discovery">01 Student Discovery</a></li>
+      <li><a href="#mastery">02 Academic Mastery</a></li>
+      <li><a href="#velocity">03 The Velocity Model</a></li>
+      <li><a href="#identity">04 Identity &amp; Navigation</a></li>
+      <li><a href="#exposure">05 Exposure &amp; Aspiration</a></li>
+      <li><a href="#inflection">06 The Inflection Point</a></li>
+      <li><a href="#measurement">07 Measurement Framework</a></li>
+    </ul>
+  </div>
+</div>
+
+<!-- 01 STUDENT DISCOVERY -->
+<section class="research-section" id="discovery">
+  <div class="section-inner">
+    <div class="section-number">01</div>
+    <h2>Student Discovery</h2>
+    <p class="lead">We use the i-Ready diagnostic to identify 6th graders performing below grade level — the students most likely to fall further behind without targeted intervention.</p>
+    <div class="section-body">
+      <div class="section-text">
+        <p>The i-Ready diagnostic is a nationally normed, adaptive assessment used across New York City public schools. It measures where a student is actually performing relative to grade-level expectations — not just whether they passed a test, but how far below or above grade level they sit.</p>
+        <p>In the Bronx, roughly 46% of entering 6th graders are performing below grade level in ELA and Math. These students are not failing because of lack of potential. They are failing because they haven't yet received instruction calibrated to where they are — and the gap compounds every year it goes unaddressed.</p>
+        <p>By targeting this specific population at this specific grade, The Masters Project maximizes impact per dollar and per hour of instruction. These are the scholars who have the most to gain from high-quality, intensive support.</p>
+        <div class="citation-card">
+          <p><strong>i-Ready Diagnostic (Curriculum Associates)</strong> — Used in all 32 NYC DOE districts. Provides grade-level placement data across five reading and four math domains, updated three times per academic year.</p>
+        </div>
+      </div>
+      <div class="stat-callout">
+        <div class="stat-num">46%</div>
+        <div class="stat-label">of Bronx 6th graders enter middle school performing below grade level in core subjects</div>
+        <div class="stat-source">NYC DOE i-Ready diagnostic data</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 ACADEMIC MASTERY -->
+<section class="research-section" id="mastery">
+  <div class="section-inner">
+    <div class="section-number">02</div>
+    <h2>Academic Mastery</h2>
+    <p class="lead">High-dosage tutoring is one of the most rigorously studied and consistently effective interventions in education — but only when delivered with enough frequency and fidelity.</p>
+    <div class="section-body">
+      <div class="section-text">
+        <p>Research from the Stanford Annenberg Institute and the National Student Support Accelerator identifies high-dosage tutoring (HDT) as instruction delivered at least three times per week, in small groups of no more than four students. Studies show that HDT moves students from the 50th to the 66th percentile on average, and is more than 20 times more effective for math achievement than lower-dosage alternatives.</p>
+        <p>Saga Education's landmark study in Chicago public schools found that students who received in-school math tutoring at a 2:1 ratio saw a +0.58 GPA increase and cut course failure rates by 50% — outcomes rarely matched by other interventions at scale.</p>
+        <p>Our curriculum is built to New York State Learning Standards in ELA and Math. Each session alternates subject focus to prevent fatigue while maintaining intensity. Instruction is benchmarked against all three i-Ready diagnostic windows so we can measure progress and iteratively adjust our curriculum to specifically suit each student.</p>
+        <div class="citation-card">
+          <p><strong>Nickow, A., Oreopoulos, P., &amp; Quan, V. (2020)</strong> — "The Impressive Effects of Tutoring on PreK-12 Learning." National Bureau of Economic Research. Meta-analysis of 96 randomized studies.</p>
+        </div>
+        <div class="citation-card">
+          <p><strong>Saga Education (2019)</strong> — University of Chicago study of 2,700+ Chicago public school students. 2:1 tutoring ratio, embedded in the school day. Results: +0.58 GPA, 50% reduction in course failure, significant gains in math standardized test scores.</p>
+        </div>
+      </div>
+      <div>
+        <div class="stat-callout">
+          <div class="stat-num">20×</div>
+          <div class="stat-label">more effective for math achievement than low-dosage tutoring alternatives</div>
+          <div class="stat-source">National Student Support Accelerator, Stanford Annenberg Institute</div>
+        </div>
+        <div class="stat-row" style="grid-template-columns:1fr 1fr;margin-top:20px;">
+          <div class="stat-mini">
+            <div class="num">50th→66th</div>
+            <div class="lbl">Percentile gain from high-dosage tutoring</div>
+          </div>
+          <div class="stat-mini">
+            <div class="num">−50%</div>
+            <div class="lbl">Course failure rate (Saga Education, Chicago)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 VELOCITY MODEL -->
+<section class="research-section" id="velocity">
+  <div class="section-inner">
+    <div class="section-number">03</div>
+    <h2>The Velocity Model</h2>
+    <p class="lead">250+ supplemental hours per year isn't arbitrary. It's the minimum required to recover a full year of lost learning — and do it within one academic year.</p>
+    <div class="section-body">
+      <div class="section-text">
+        <p>Research from EdResearch for Action — a collaboration between the Learning Agency Lab and leading education researchers — quantifies the remediation load: recovering one full year of learning loss requires approximately 5–6 months of additional, high-quality instruction beyond what the student would otherwise receive.</p>
+        <p>Our model delivers exactly that. Two afterschool sessions per week (2 hours each) plus one Saturday session (3 hours) totals 7 hours of supplemental instruction weekly. Over a 36-week school year, that yields more than 250 hours — enough to close a full year's gap while the student is simultaneously keeping pace with current grade-level instruction.</p>
+        <p>This is not enrichment. This is structured, intensive academic recovery. The schedule is designed so scholars never fall further behind while catching up — a dual-track that requires both volume and quality to work.</p>
+        <div class="citation-card">
+          <p><strong>EdResearch for Action (2021)</strong> — "Accelerating Student Learning with High-Dosage Tutoring." Synthesizes research on learning loss recovery timelines and intervention intensity thresholds.</p>
+        </div>
+      </div>
+      <div>
+        <div class="stat-callout">
+          <div class="stat-num">250+</div>
+          <div class="stat-label">supplemental instructional hours delivered per scholar, per year — enough to recover a full year of lost learning</div>
+          <div class="stat-source">7 hrs/week × 36 weeks</div>
+        </div>
+        <div class="stat-row" style="grid-template-columns:1fr 1fr;margin-top:20px;">
+          <div class="stat-mini">
+            <div class="num">5–6</div>
+            <div class="lbl">Months of instruction needed to recover 1 year of loss</div>
+          </div>
+          <div class="stat-mini">
+            <div class="num">3×</div>
+            <div class="lbl">Sessions per week — the HDT frequency threshold</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 IDENTITY & NAVIGATION -->
+<section class="research-section" id="identity">
+  <div class="section-inner">
+    <div class="section-number">04</div>
+    <h2>Identity &amp; Navigation</h2>
+    <p class="lead">Academic skill alone is not enough. Scholars need a strong, grounded sense of who they are — and the tools to navigate environments very different from home.</p>
+    <div class="section-body">
+      <div class="section-text">
+        <p>Dr. Joshua Aronson's foundational research on stereotype threat demonstrates that Black and Latino students who are aware of negative academic stereotypes perform measurably worse on standardized tests — not because of ability, but because of the cognitive burden of disproving the stereotype in real time. Aronson, Fried &amp; Good (2002) found that teaching students to adopt an incremental theory of intelligence — the idea that intelligence is developed, not fixed — significantly improved their GPA and reduced the performance gap.</p>
+        <p>Dr. Diane Hughes at NYU Steinhardt has spent decades studying ethnic-racial socialization (ERS): the ways in which families and communities communicate messages about race, identity, and coping with discrimination to young people. Her research shows that students with a strong, positive racial identity demonstrate greater academic resilience, stronger self-concept, and better long-term outcomes — even in high-stress academic environments.</p>
+        <p>Our Navigator's Lab component directly addresses this. Scholars learn to name and articulate their identity, understand their community's history, and develop the confidence and code-switching fluency to thrive in any room they enter.</p>
+        <div class="citation-card">
+          <p><strong>Aronson, J., Fried, C. B., &amp; Good, C. (2002)</strong> — "Reducing the effects of stereotype threat on African American college students by shaping theories of intelligence." <em>Journal of Experimental Social Psychology, 38</em>(2), 113–125.</p>
+        </div>
+        <div class="citation-card">
+          <p><strong>Hughes, D. (2003)</strong> — "Correlates of African American and Latino parents' messages to children about ethnicity and race." <em>American Journal of Community Psychology, 31</em>(1–2), 15–33. Dr. Hughes is a Professor at NYU Steinhardt.</p>
+        </div>
+      </div>
+      <div class="stat-callout">
+        <div class="stat-num" style="font-size:2rem;line-height:1.3;">"Intelligence grows with effort."</div>
+        <div class="stat-label" style="margin-top:12px;">Teaching this belief — a growth mindset — narrowed the racial achievement gap in GPA among college students. The same principle, embedded early, is even more powerful.</div>
+        <div class="stat-source">Aronson, Fried &amp; Good (2002)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 EXPOSURE & ASPIRATION -->
+<section class="research-section" id="exposure">
+  <div class="section-inner">
+    <div class="section-number">05</div>
+    <h2>Exposure &amp; Aspiration</h2>
+    <p class="lead">Where students spend time shapes what they believe is possible for themselves. Environment is not background — it is instruction.</p>
+    <div class="section-body">
+      <div class="section-text">
+        <p>Research in environmental psychology and education consistently finds that physical and social environments communicate powerful messages about belonging and possibility. When students from under-resourced communities are placed in aspirational environments — university campuses, professional offices, college prep programs — they internalize expanded visions of what they can become.</p>
+        <p>This is not merely anecdotal. Studies show that brief exposure to high-achieving role models who share students' racial and ethnic backgrounds measurably improves academic motivation and persistence. The effect is especially strong during early adolescence, when identity formation is most active.</p>
+        <p>The Masters Project deliberately builds exposure into the program model. Site visits to colleges, professional environments, and cultural institutions are not field trips — they are structured aspiration experiences, each debriefed in Navigator's Lab so scholars can connect what they saw to their own emerging identity and goals. Scholars see people who look like them in rooms they hadn't imagined for themselves. That shift in perception is irreversible.</p>
+        <div class="citation-card">
+          <p><strong>Duckworth, A. L. et al. (2007)</strong> — "Grit: Perseverance and Passion for Long-Term Goals." <em>Journal of Personality and Social Psychology, 92</em>(6), 1087–1101. Grit — not IQ — predicts academic achievement across populations.</p>
+        </div>
+      </div>
+      <div class="stat-callout">
+        <div class="stat-num" style="font-size:1.8rem;line-height:1.4;">"You can't be what you can't see."</div>
+        <div class="stat-label" style="margin-top:12px;">Exposure to aspirational environments — especially with relatable role models — is one of the most powerful tools for shifting what young people believe is achievable for themselves.</div>
+        <div class="stat-source">Environmental psychology &amp; aspiration research</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 INFLECTION POINT -->
+<section class="research-section" id="inflection">
+  <div class="section-inner">
+    <div class="section-number">06</div>
+    <h2>The Inflection Point</h2>
+    <p class="lead">6th grade is not just another year. It is the moment when trajectories diverge — and when intervention has the highest return on investment.</p>
+    <div class="section-body">
+      <div class="section-text">
+        <p>Dr. Elise Cappella at NYU Steinhardt has documented the 6th grade transition as a critical inflection point in students' academic trajectories. The shift from elementary to middle school — new building, multiple teachers, greater independence, social complexity — is one of the most disorienting transitions in a student's educational life. Students who enter this transition already behind have a dramatically lower probability of recovering without targeted support.</p>
+        <p>The data on long-term outcomes underscores the urgency. Fewer than 50% of below-grade-level 6th graders graduate high school on time. The gap in lifetime earnings between those who do and those who don't graduate — let alone attend college — exceeds $1 million. These are not abstract statistics. They describe the futures of real children in the Bronx right now.</p>
+        <p>6th grade is where the window is still open. By intervening at this exact moment, The Masters Project catches students before the trajectory calcifies — when acceleration is still possible and the investment of one intensive year can redirect the next decade.</p>
+        <div class="citation-card">
+          <p><strong>Cappella, E. &amp; Weinstein, R. S. (2001)</strong> — "Turning around reading achievement: Predictors of high school students' academic resilience." <em>Journal of Educational Psychology, 93</em>(4), 758–771. Dr. Cappella leads the Applied Psychology &amp; Human Development program at NYU Steinhardt.</p>
+        </div>
+      </div>
+      <div>
+        <div class="stat-callout">
+          <div class="stat-num">&lt;50%</div>
+          <div class="stat-label">of below-grade-level 6th graders graduate high school on time — the downstream cost of early gaps left unaddressed</div>
+          <div class="stat-source">National graduation rate research</div>
+        </div>
+        <div class="stat-mini" style="margin-top:20px;text-align:left;padding:24px;">
+          <div style="font-size:0.78rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;">Lifetime earnings gap</div>
+          <div class="num">$1M+</div>
+          <div class="lbl" style="text-align:left;">Between a high school dropout and a college graduate — the stakes of the 6th grade trajectory</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 07 MEASUREMENT -->
+<section class="research-section" id="measurement">
+  <div class="section-inner">
+    <div class="section-number">07</div>
+    <h2>Measurement Framework</h2>
+    <p class="lead">We hold ourselves to a clear, concrete definition of success — and we track every scholar against it in real time.</p>
+    <div class="section-body full">
+      <div class="section-text">
+        <p>Success at The Masters Project is not defined by participation or anecdote. It is defined by a scholar completing the year without being recommended for summer school — a threshold that requires earning a 65 or above in both ELA and Math and maintaining 80% or better attendance. These are the same benchmarks New York City public schools use to determine grade promotion.</p>
+        <p>We chose this metric deliberately. It is objective, standardized, and directly tied to real-world consequences for scholars. It is also ambitious: for many of our incoming scholars, these benchmarks represent a significant leap from where they start. That gap is exactly why the program exists.</p>
+        <p>Progress is tracked continuously across three i-Ready diagnostic windows and two final grade assessments per subject. Instructors review data weekly and adjust instruction accordingly — ensuring we are not just delivering hours, but delivering the right instruction to each scholar.</p>
+      </div>
+    </div>
+    <table class="measure-table" style="margin-top:40px;">
+      <thead>
+        <tr>
+          <th>Metric</th>
+          <th>Target</th>
+          <th>Measurement Tool</th>
+          <th>Frequency</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>ELA Grade</strong></td>
+          <td>65 or above</td>
+          <td>NYC DOE final grade</td>
+          <td>End of year</td>
+        </tr>
+        <tr>
+          <td><strong>Math Grade</strong></td>
+          <td>65 or above</td>
+          <td>NYC DOE final grade</td>
+          <td>End of year</td>
+        </tr>
+        <tr>
+          <td><strong>Attendance</strong></td>
+          <td>80%+ in program &amp; school</td>
+          <td>Internal tracking + school records</td>
+          <td>Weekly</td>
+        </tr>
+        <tr>
+          <td><strong>i-Ready Progress</strong></td>
+          <td>At least 1 grade level gained</td>
+          <td>i-Ready diagnostic</td>
+          <td>3× per year (Fall, Winter, Spring)</td>
+        </tr>
+        <tr>
+          <td><strong>Summer School Recommendation</strong></td>
+          <td>Zero scholars recommended</td>
+          <td>School promotion decision</td>
+          <td>End of year</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="citation-card" style="margin-top:32px;">
+      <p><strong>Pope, D. et al. (2016)</strong> — Study of approximately 2 million U.S. students found that math instruction delivered earlier in the school day is associated with significantly higher performance. Our Saturday schedule places Math Mastery in the first instructional block, 9:15–10:15 AM, in direct alignment with this finding.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-name">The Masters <span>Project</span></div>
+      <p>Bronx, NY &mdash; Pilot Launch Fall 2026</p>
+    </div>
+    <ul class="footer-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html#program">Program</a></li>
+      <li><a href="research.html">Research</a></li>
+      <li><a href="the_team.html">Team</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+      <li><a href="https://linkedin.com/company/112617378" target="_blank" style="display:inline-flex;align-items:center;gap:6px;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>LinkedIn</a></li>
+    </ul>
+    <div class="footer-copy">&copy; 2026 The Masters Project. Bronx, NY. Founded 2025. 501(c)(3) pending.</div>
+  </div>
+</footer>
+
+</body>
+</html>
